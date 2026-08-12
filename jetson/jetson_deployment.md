@@ -1,29 +1,33 @@
-# NVIDIA Jetson Orin Nano 邊緣部署與移植指南
+# NVIDIA Jetson Orin Nano 邊緣部署與 GitHub 自動同步指南
 
-本指南說明如何將 **jetson/ (Module 2 HMI)** 資料夾從開發 PC 打包傳輸至 **NVIDIA Jetson Orin Nano** 邊緣裝置並順利啟動運行。
+本指南說明如何透過 **GitHub** 將專案同步至 **NVIDIA Jetson Orin Nano** 邊緣裝置，並完成環境設定、TensorRT 模型轉譯與 HMI 人機介面啟動。
 
 ---
 
-## 📦 步驟一：打包與傳輸 jetson/ 模組
+## 📦 步驟一：透過 GitHub Clone 取得最新程式碼
 
-請將 PC 端的 `Bee_project/jetson` 資料夾傳輸至 Jetson（建議放置於 `/home/<username>/Bee_project/jetson`）。
+在 Jetson Orin Nano 上的 Terminal 終端機執行：
 
-> ⚠️ **注意事項**：**請勿將 PC 端的 `.venv` 虛擬環境資料夾複製過去**！因為 Windows 端的 Python 二進位檔無法在 Linux ARM64 上執行。
+```bash
+# 1. 複製 GitHub 儲存庫
+cd ~
+git clone https://github.com/<your-github-username>/Bee_project.git
 
-### 傳輸方式建議 (二選一)：
-1. **方式 A：使用隨身碟 / 外接硬碟**：
-   - 複製 `Bee_project/jetson` 資料夾至隨身碟。
-2. **方式 B：使用 SSH / SCP 指令 (網域傳輸)**：
-   在 PC 端的 PowerShell 執行：
-   ```powershell
-   scp -r d:\Bee_project\jetson user@<jetson_ip>:/home/user/Bee_project/
-   ```
+# 2. 進入 jetson 邊緣端目錄
+cd ~/Bee_project/jetson
+```
+
+> 💡 **日後更新版**：如果在 PC 端修改了程式碼並 `git push` 到 GitHub，只需在 Jetson 端執行：
+> ```bash
+> cd ~/Bee_project
+> git pull origin main
+> ```
 
 ---
 
 ## 🛠️ 步驟二：Jetson Orin Nano 環境安裝與虛擬環境建置
 
-在 Jetson 的 Terminal 終端機中執行：
+在 Jetson 終端機中執行：
 
 ### 1. 安裝 Linux 系統基礎套件
 ```bash
@@ -31,7 +35,7 @@ sudo apt update
 sudo apt install -y python3-pip python3-venv python3-pyqt5 libsqlite3-dev
 ```
 
-### 2. 建置獨立 `.venv` 虛擬環境 (使用 `--system-site-packages` 以共用 Jetson TensorRT/PyTorch 庫)
+### 2. 建置獨立 `.venv` 虛擬環境 (使用 `--system-site-packages` 以共用 JetPack TensorRT/PyTorch 庫)
 ```bash
 cd ~/Bee_project/jetson
 
@@ -45,23 +49,23 @@ source .venv/bin/activate
 ### 3. 安裝 Python 套件依賴
 ```bash
 pip install --upgrade pip
-pip install ultralytics opencv-python Pillow PyYAML tqdm
+pip install -r requirements.txt
 ```
 
 ---
 
 ## ⚡ 步驟三：轉譯最佳化 TensorRT `.engine` 推論模型
 
-將 PC 端訓練好的 `best.onnx` (或 `best.pt`) 放置於 `jetson/models/` 或 `jetson/` 目錄下，在 Jetson 上執行轉譯：
+模型檔已整合於 `jetson/models/best.onnx`。在 Jetson 上執行 FP16 轉譯命令：
 
 ```bash
 cd ~/Bee_project/jetson
 source .venv/bin/activate
 
 # 將 ONNX 模型轉譯為 Jetson Orin Nano FP16 加速引擎 best.engine
-python3 -c "from ultralytics import YOLO; model = YOLO('best.onnx'); model.export(format='engine', half=True)"
+python3 -c "from ultralytics import YOLO; model = YOLO('models/best.onnx'); model.export(format='engine', half=True)"
 ```
-轉譯完成後，會產生 `best.engine`，推論速度可提升數倍並大幅降低耗電！
+轉譯完成後，會產生 `models/best.engine`，推論速度可提升數倍並大幅降低硬體功耗！
 
 ---
 
