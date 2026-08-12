@@ -23,7 +23,7 @@ flowchart TD
         F[相機即時串流] --> G[TensorRT/ONNX 推論 & ByteTrack 追蹤]
         E --> G
         G --> H[走廊雙標記線 Line A ↔ Line B 順序進出狀態機]
-        H --> I[PyQt5 離線 MUJI 風格 3 分頁人機介面 main.py]
+        H --> I[PyQt5 離線暖色極簡 3 分頁人機介面 main.py]
     end
 ```
 
@@ -31,7 +31,7 @@ flowchart TD
 
 ## 🌟 系統特色與介面設計 (HMI Highlights)
 
-- 🌿 **無印良品 (MUJI) 圓滑極簡美學**：選用圓潤筆劃字型 (`Quicksand`, `Nunito`, `Microsoft JhengHei UI`)，全域字級顯著放大 (16px ~ 38px)，配合柔和亞麻米白 `#F5F2EB` 與暗紅 `#7F2424` 標題，久看舒適不刺眼。
+- 🌿 **圓滑暖色極簡視覺設計**：選用圓潤筆劃字型 (`Quicksand`, `Nunito`, `Microsoft JhengHei UI`)，全域字級顯著放大 (16px ~ 38px)，配合柔和亞麻米白 `#F5F2EB` 與暗紅 `#7F2424` 標題，久看舒適不刺眼。
 - 🟢 **開啟預設靜態與二合一啟動/暫停鈕**：開啟介面時不預設自動播放；透過單一高質感按鈕自由切換 `▶ 啟動推論` (綠) ↔ `⏸ 暫停推論` (黃)。
 - 🔴 **一鍵停止與重置計數**：提供 `🔄 停止並重置計數` 按鈕，迅速中斷推論並清空歸零今日 IN/OUT 統計與日誌。
 - 🎯 **100% 直覺滑鼠拖曳拉線校正**：移除冗餘的像素座標 SpinBox，直接於即時視訊畫面上拖拽 **Line A (藍)** 與 **Line B (綠)** 端點圓點，一鍵套用存檔。
@@ -60,7 +60,7 @@ Bee_project/
     ├── tracking/           # ByteTrack 多目標追蹤與走廊雙線 (Line A ↔ Line B) 狀態機
     │   ├── bee_tracker.py
     │   └── line_counter.py
-    ├── hmi/                # 離線 PyQt5 MUJI 風格 3 分頁 HMI 介面模組
+    ├── hmi/                # 離線 PyQt5 圓滑極簡 3 分頁 HMI 介面模組
     │   ├── main_window.py  # 3 分頁主視窗
     │   ├── page_dashboard.py # 頁面一：即時監控與單一 Start/Pause 控制
     │   ├── page_capture.py # 頁面二：現場採樣照片存檔

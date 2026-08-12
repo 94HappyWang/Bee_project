@@ -6,7 +6,7 @@
 
 ## 🌟 介面與控制亮點
 
-- **無印良品 (MUJI) 圓滑暖色調視覺**：採用 `Quicksand` / `Nunito` / `Microsoft JhengHei UI` 圓潤字體，全域字體顯著加大 (16px ~ 38px)。
+- **圓滑暖色調極簡視覺**：採用 `Quicksand` / `Nunito` / `Microsoft JhengHei UI` 圓潤字體，全域字體顯著加大 (16px ~ 38px)。
 - **開啟預設靜態與二合一啟動/暫停按鈕**：`▶ 啟動推論` (綠) ↔ `⏸ 暫停推論` (黃) 單鈕切換。
 - **一鍵停止與重置計數**：`🔄 停止並重置計數` 強效重置鍵。
 - **純畫布拖曳校正**：移除繁瑣數字 SpinBox，直接於畫布上以滑鼠拖動 **Line A (藍)** / **Line B (綠)** 端點校正。
@@ -22,7 +22,7 @@ jetson/
 ├── tracking/               # 物件追蹤與進出判定算法
 │   ├── bee_tracker.py      # ByteTrack 多目標追蹤與軌跡處理
 │   └── line_counter.py     # 走廊雙虛擬線 Line A ↔ Line B 順序進出狀態機 (IN/OUT)
-├── hmi/                    # 100% 離線 PyQt5 MUJI 風格人機介面
+├── hmi/                    # 100% 離線 PyQt5 圓滑暖色極簡人機介面
 │   ├── main_window.py      # QStackedWidget 3 頁分頁主視窗
 │   ├── page_dashboard.py   # 頁面一：即時視訊與單一 Start/Pause 控制
 │   ├── page_capture.py     # 頁面二：現場採樣照片存檔工具
