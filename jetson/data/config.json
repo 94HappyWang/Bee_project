@@ -1,0 +1,23 @@
+{
+  "camera_source": "data/sample_corridor.mp4",
+  "model_path": "best.pt",
+  "conf_threshold": 0.3,
+  "iou_threshold": 0.45,
+  "line_a": [
+    81,
+    166,
+    563,
+    94
+  ],
+  "line_b": [
+    82,
+    329,
+    562,
+    329
+  ],
+  "line_a_name": "Line A (室外端)",
+  "line_b_name": "Line B (門口端)",
+  "max_crossing_time": 5.0,
+  "db_path": "data/bee_logs.sqlite",
+  "csv_path": "data/bee_logs.csv"
+}
