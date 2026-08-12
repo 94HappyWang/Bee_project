@@ -43,8 +43,11 @@ def main():
 
     window = MainWindow()
     window.show()
+    logger.info("HMI Window displayed successfully! (視窗已開啟，請在畫面上點選 [▶ 啟動推論])")
 
-    sys.exit(app.exec_())
+    ret = app.exec_()
+    logger.info("HMI Application closed normally.")
+    sys.exit(ret)
 
 
 if __name__ == "__main__":
